@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
     "clsx": "^2.1.1",
     "lucide": "^0.559.0",
     "lucide-react": "^0.559.0",
