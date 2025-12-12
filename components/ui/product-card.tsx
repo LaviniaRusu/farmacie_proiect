@@ -50,6 +50,8 @@ import { Product } from "@/types";
 import IconButton from "@/components/ui/icon-button";
 import Currency from "@/components/ui/currency";
 import { useRouter } from "next/navigation";
+import usePreviewModal from "@/hooks/use-preview-modal";
+import { MouseEventHandler } from "react";
 
 interface ProductCardProps {
   data: Product;
@@ -57,9 +59,16 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   const router = useRouter();
+  const previewModal = usePreviewModal();
   const handleClick = () => {
     router.push(`/product/${data?.id}`);
   };
+  const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+
+    previewModal.onOpen(data);
+  };
+
   return (
     <div
       onClick={handleClick}
@@ -112,7 +121,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
             "
           >
             <IconButton
-              onClick={() => {}}
+              onClick={onPreview}
               icon={<Expand size={20} className="text-gray-600" />}
             />
 
