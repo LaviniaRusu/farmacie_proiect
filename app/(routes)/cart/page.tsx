@@ -3,6 +3,7 @@
 import useCart from "@/hooks/use-cart";
 import Container from "@/components/ui/container";
 import CartItem from "./components/cart-item";
+import Summary from "./components/summary";
 
 const CartPage = () => {
   const cart = useCart();
@@ -18,12 +19,12 @@ const CartPage = () => {
               {cart.items.length === 0 && (
                 <p className="text-neutral-500">No items added to cart.</p>
               )}
-
               <ul>
                 {cart.items.map((item) => (
                   <CartItem key={item.id} data={item} />
                 ))}
               </ul>
+              <Summary />
             </div>
           </div>
         </div>
