@@ -1,6 +1,6 @@
 import { Dosage } from "@/types";
 
-const URL = `${process.env.NEXT_PUBLIC_API_URL}/colors`;
+const URL = `${process.env.NEXT_PUBLIC_API_URL}/dosages`;
 
 const getDosages = async (): Promise<Dosage[]> => {
   const res = await fetch(URL, {

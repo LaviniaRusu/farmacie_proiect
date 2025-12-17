@@ -26,8 +26,7 @@ export interface Product {
   name: string;
   price: string;
   isFeatured: boolean;
-  size: Size;
-  color: Color;
+
   dosage: Dosage;
   pharmaceuticalForm: PharmaceuticalForm;
 
@@ -37,16 +36,4 @@ export interface Product {
 export interface Image {
   id: string;
   url: string;
-}
-
-export interface Size {
-  id: string;
-  name: string;
-  value: string;
-}
-
-export interface Color {
-  id: string;
-  name: string;
-  value: string;
 }

@@ -4,17 +4,21 @@ import { useState } from "react";
 import { Plus, X } from "lucide-react";
 import { Dialog } from "@headlessui/react";
 
-import { Color, Size } from "@/types";
+import { Dosage, PharmaceuticalForm } from "@/types";
 import Button from "@/components/ui/button";
 import IconButton from "@/components/ui/icon-button";
 import Filter from "./filter";
 
 interface MobileFiltersProps {
-  sizes: Size[];
-  colors: Color[];
+  pharmaceuticalForm: PharmaceuticalForm[];
+
+  dosages: Dosage[];
 }
 
-const MobileFilters: React.FC<MobileFiltersProps> = ({ sizes, colors }) => {
+const MobileFilters: React.FC<MobileFiltersProps> = ({
+  dosages,
+  pharmaceuticalForm,
+}) => {
   const [open, setOpen] = useState(false);
 
   const onOpen = () => setOpen(true);
@@ -47,8 +51,12 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({ sizes, colors }) => {
 
             {/* Filters */}
             <div className="p-4">
-              <Filter valueKey="sizeId" name="Sizes" data={sizes} />
-              <Filter valueKey="colorId" name="Colors" data={colors} />
+              <Filter valueKey="dosageId" name="Doza" data={dosages} />
+              <Filter
+                valueKey="pharmaceuticalFormId"
+                name="Forma farmaceutica"
+                data={pharmaceuticalForm}
+              />
             </div>
           </Dialog.Panel>
         </div>

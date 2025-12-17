@@ -3,12 +3,12 @@
 import qs from "query-string";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { Color, Size } from "@/types";
+import { Dosage, PharmaceuticalForm } from "@/types";
 import Button from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface FilterProps {
-  data: (Size | Color)[];
+  data: (Dosage | PharmaceuticalForm)[];
   name: string;
   valueKey: string;
 }
