@@ -37,6 +37,8 @@ import NavbarActions from "./ui/navbar-actions";
 
 import { MainNavbar } from "./ui/main-navbar";
 import CategoriesNav from "@/app/(routes)/categories/page";
+import { Search } from "lucide-react";
+import SearchInput from "./search-input";
 
 export const revalidate = 0;
 
@@ -57,6 +59,7 @@ const Navbar = async () => {
 
           {/* PAGINI – rămân imediat după STORE */}
           <MainNavbar />
+          <SearchInput />
 
           {/* ACTIUNI (cart etc) */}
           <div className="ml-auto">
