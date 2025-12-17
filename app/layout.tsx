@@ -12,8 +12,8 @@ const font = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: "Store",
-  description: "Store",
+  title: "Farmacie",
+  description: "Farmacie",
 };
 
 export default function RootLayout({

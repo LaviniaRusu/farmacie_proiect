@@ -24,7 +24,7 @@ export function MainNavbar({
     },
     {
       href: `/about`,
-      label: "About",
+      label: "Despre noi",
       active: pathname === "/about",
     },
   ];

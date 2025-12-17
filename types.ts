@@ -9,6 +9,17 @@ export interface Category {
   name: string;
   billboard: Billboard;
 }
+export interface PharmaceuticalForm {
+  id: string;
+  name: string;
+  code: string;
+  route: string;
+}
+export interface Dosage {
+  id: string;
+  name: string;
+  value: string;
+}
 export interface Product {
   id: string;
   category: Category;
@@ -17,6 +28,9 @@ export interface Product {
   isFeatured: boolean;
   size: Size;
   color: Color;
+  dosage: Dosage;
+  pharmaceuticalForm: PharmaceuticalForm;
+
   images: Image[];
 }
 

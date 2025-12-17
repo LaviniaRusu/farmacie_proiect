@@ -52,7 +52,7 @@ const Navbar = async () => {
             href="/"
             className="flex items-center gap-x-2 font-bold text-xl text-gray-900 tracking-wide hover:text-green-700 transition"
           >
-            STORE
+            La un click distanta
           </Link>
 
           {/* PAGINI – rămân imediat după STORE */}
