@@ -152,6 +152,70 @@
 // };
 
 // export default Navbar;
+// "use client";
+
+// import { useState } from "react";
+// import Link from "next/link";
+// import { Menu } from "lucide-react";
+
+// import Container from "@/components/ui/container";
+// import { MainNavbar } from "./ui/main-navbar";
+// import NavbarActions from "./ui/navbar-actions";
+// import SearchInput from "./search-input";
+// import MobileMenu from "./mobil-meniu";
+
+// const Navbar = () => {
+//   const [open, setOpen] = useState(false);
+
+//   return (
+//     <>
+//       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
+//         <Container>
+//           <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+//             {/* LOGO */}
+//             <Link href="/" className="text-xl font-semibold text-gray-900">
+//               La <span className="text-blue-600">un</span> click distanță
+//             </Link>
+
+//             {/* DESKTOP NAV */}
+//             <nav className="hidden md:flex items-center gap-8">
+//               <MainNavbar />
+//             </nav>
+
+//             {/* RIGHT SIDE */}
+//             <div className="flex items-center gap-4">
+//               {/* SEARCH */}
+//               <div className="relative hidden lg:block">
+//                 <div className="relative">
+//                   <SearchInput />
+//                 </div>
+//               </div>
+
+//               {/* ACTIONS (CART) */}
+//               <div className="hidden md:flex">
+//                 <NavbarActions />
+//               </div>
+
+//               {/* MOBILE MENU BUTTON */}
+//               <button
+//                 onClick={() => setOpen(true)}
+//                 className="md:hidden p-2 hover:bg-gray-100 rounded-full transition-colors"
+//                 aria-label="Open menu"
+//               >
+//                 <Menu className="w-6 h-6 text-gray-700" />
+//               </button>
+//             </div>
+//           </div>
+//         </Container>
+//       </header>
+
+//       {/* MOBILE MENU */}
+//       <MobileMenu open={open} setOpen={setOpen} />
+//     </>
+//   );
+// };
+
+// export default Navbar;
 "use client";
 
 import { useState } from "react";
@@ -169,47 +233,41 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
         <Container>
-          <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center px-4 sm:px-6 lg:px-8">
             {/* LOGO */}
             <Link href="/" className="text-xl font-semibold text-gray-900">
               La <span className="text-blue-600">un</span> click distanță
             </Link>
 
-            {/* DESKTOP NAV */}
-            <nav className="hidden md:flex items-center gap-8">
+            {/* PAGINI */}
+            <nav className="ml-10 hidden md:flex items-center gap-8">
               <MainNavbar />
             </nav>
 
-            {/* RIGHT SIDE */}
-            <div className="flex items-center gap-4">
-              {/* SEARCH */}
-              <div className="relative hidden lg:block">
-                <div className="relative">
-                  <SearchInput />
-                </div>
-              </div>
-
-              {/* ACTIONS (CART) */}
-              <div className="hidden md:flex">
-                <NavbarActions />
-              </div>
-
-              {/* MOBILE MENU BUTTON */}
-              <button
-                onClick={() => setOpen(true)}
-                className="md:hidden p-2 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="Open menu"
-              >
-                <Menu className="w-6 h-6 text-gray-700" />
-              </button>
+            {/* SEARCH – DUPĂ PAGINI */}
+            <div className="ml-8 hidden lg:block w-72">
+              <SearchInput />
             </div>
+
+            {/* DREAPTA */}
+            <div className="ml-auto hidden md:flex items-center gap-4">
+              <NavbarActions />
+            </div>
+
+            {/* MOBILE MENU */}
+            <button
+              onClick={() => setOpen(true)}
+              className="ml-auto md:hidden p-2 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="Open menu"
+            >
+              <Menu className="w-6 h-6 text-gray-700" />
+            </button>
           </div>
         </Container>
       </header>
 
-      {/* MOBILE MENU */}
       <MobileMenu open={open} setOpen={setOpen} />
     </>
   );
