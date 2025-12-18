@@ -75,21 +75,21 @@ const Info: React.FC<InfoProps> = ({ data }) => {
         </p>
       </div>
 
-      <hr className="my-4" />
+      <hr className="my-4 border-gray-300" />
 
       <div className="flex flex-col gap-y-6">
         <div className="flex items-center gap-x-4">
-          <h3 className="font-semibold text-black">Forma farmaceutică:</h3>
+          <h3 className="font-semibold text-blue-700">Forma farmaceutică:</h3>
           <div>{data?.pharmaceuticalForm?.name}</div>
         </div>
 
         <div className="flex items-center gap-x-4">
-          <h3 className="font-semibold text-black">Doza:</h3>
+          <h3 className="font-semibold text-blue-700">Doza:</h3>
           <div>{data?.dosage?.value}</div>
         </div>
 
         <div className="flex items-center gap-x-4">
-          <h3 className="font-semibold text-black">Categorie vârstă:</h3>
+          <h3 className="font-semibold text-blue-700">Categorie vârstă:</h3>
           <div>{data?.dosage?.name}</div>
         </div>
 

@@ -17,7 +17,7 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
     <Transition show={open} appear as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
         {/* Background overlay */}
-        <div className="fixed inset-0 bg-black bg-opacity-50" />
+        <div className="fixed inset-0 bg-blue-100 bg-opacity-50" />
 
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">

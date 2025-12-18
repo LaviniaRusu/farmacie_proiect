@@ -13,6 +13,11 @@ export function MainNavbar({
 
   const routes = [
     {
+      href: `/`,
+      label: "Acasa",
+      active: pathname === "/",
+    },
+    {
       href: `/category`,
       label: "Categorii de produse",
       active: pathname === "/category",
@@ -22,6 +27,7 @@ export function MainNavbar({
       label: "Contact",
       active: pathname === "/contact",
     },
+
     {
       href: `/about`,
       label: "Despre noi",

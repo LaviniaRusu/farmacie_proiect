@@ -25,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${font.variable} ${font.variable} antialiased`}>
+      <body
+        className={`${font.variable} antialiased bg-blue-100 text-gray-900`}
+      >
         <SearchProvider>
           <ModalProvider />
           <ToastProvider />

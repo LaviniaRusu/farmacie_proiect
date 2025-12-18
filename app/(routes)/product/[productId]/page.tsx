@@ -23,6 +23,7 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   return (
     <div className="bg-white">
+      gjhjkjkkj
       <Container>
         <div className="px-4 py-10 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">

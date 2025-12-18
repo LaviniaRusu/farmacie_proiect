@@ -45,34 +45,32 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   console.log("categoryId", category);
 
   return (
-    <div className="bg-white">
+    <div className="bg-gray-50">
       <Container>
-        {/* <Billboard data={category.billboard} /> */}
-        <div className="px-4 sm:px-6 lg:px-8 pb-24">
-          <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
-            <MobileFilters
-              dosages={dosages}
-              pharmaceuticalForm={pharmaceuticalForm}
-            />
-            <div className="hidden lg:block">
-              <Filter valueKey="dosageId" name="Doza" data={dosages} />
-            </div>
-            <div className="hidden lg:block">
-              <Filter
-                valueKey="pharmaceuticalFormId"
-                name="Forma farmaceutica "
-                data={pharmaceuticalForm}
+        <div className="px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
+            {/* FILTERS */}
+            <aside className="lg:col-span-1 bg-white rounded-lg border border-gray-200 p-6 h-fit">
+              <MobileFilters
+                dosages={dosages}
+                pharmaceuticalForm={pharmaceuticalForm}
               />
-            </div>
-            <div className="mt-6 lg:col-span-4 lg:mt-0">
+
+              <div className="hidden lg:block">
+                <Filter valueKey="dosageId" name="Doza" data={dosages} />
+                <Filter
+                  valueKey="pharmaceuticalFormId"
+                  name="Forma farmaceutică"
+                  data={pharmaceuticalForm}
+                />
+              </div>
+            </aside>
+
+            {/* PRODUCTS */}
+            <section className="lg:col-span-3">
               {products.length === 0 && <NoResults />}
-              {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {products.map((item) => (
-                  <ProductCard key={item.id} data={item} />
-                ))}
-              </div> */}
               <ProductList title="" items={products} />
-            </div>
+            </section>
           </div>
         </div>
       </Container>
