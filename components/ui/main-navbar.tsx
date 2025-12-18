@@ -13,9 +13,9 @@ export function MainNavbar({
 
   const routes = [
     {
-      href: `/categories`,
+      href: `/category`,
       label: "Categorii de produse",
-      active: pathname === "/categories",
+      active: pathname === "/category",
     },
     {
       href: `/contact`,

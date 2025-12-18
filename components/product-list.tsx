@@ -1,38 +1,38 @@
-import { Product } from "@/types";
-import NoResults from "@/components/ui/no-results";
-import ProductCard from "@/components/ui/product-card";
+// import { Product } from "@/types";
+// import NoResults from "@/components/ui/no-results";
+// import ProductCard from "@/components/ui/product-card";
 
-interface ProductListProps {
-  title: string;
-  items: Product[];
-}
+// interface ProductListProps {
+//   title: string;
+//   items: Product[];
+// }
 
-const ProductList: React.FC<ProductListProps> = ({ title, items }) => {
-  return (
-    <div className="space-y-4">
-      <h3 className="font-bold text-3xl">{title}</h3>
+// const ProductList: React.FC<ProductListProps> = ({ title, items }) => {
+//   return (
+//     <div className="space-y-4">
+//       <h3 className="font-bold text-3xl">{title}</h3>
 
-      {items.length === 0 && <NoResults />}
+//       {items.length === 0 && <NoResults />}
 
-      <div
-        className="
-        grid
-        grid-cols-1
-        sm:grid-cols-2
-        md:grid-cols-3
-        lg:grid-cols-4
-        gap-4
-      "
-      >
-        {items.map((item) => (
-          <ProductCard key={item.id} data={item} />
-        ))}
-      </div>
-    </div>
-  );
-};
+//       <div
+//         className="
+//         grid
+//         grid-cols-1
+//         sm:grid-cols-2
+//         md:grid-cols-3
+//         lg:grid-cols-4
+//         gap-4
+//       "
+//       >
+//         {items.map((item) => (
+//           <ProductCard key={item.id} data={item} />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
-export default ProductList;
+// export default ProductList;
 // "use client";
 
 // import { Product } from "@/types";
@@ -77,3 +77,38 @@ export default ProductList;
 // };
 
 // export default ProductList;
+"use client";
+
+import { Product } from "@/types";
+import { useSearch } from "@/components/search-context";
+import ProductCard from "@/components/ui/product-card";
+import NoResults from "@/components/ui/no-results";
+
+interface ProductListProps {
+  title: string;
+  items: Product[];
+}
+
+const ProductList = ({ title, items }: ProductListProps) => {
+  const { search } = useSearch();
+
+  const filteredItems = items.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="space-y-4">
+      <h3 className="text-3xl font-bold">{title}</h3>
+
+      {filteredItems.length === 0 && <NoResults />}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {filteredItems.map((item) => (
+          <ProductCard key={item.id} data={item} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ProductList;
