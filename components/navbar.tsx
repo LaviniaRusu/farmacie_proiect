@@ -6,22 +6,34 @@
 
 // import { MainNavbar } from "./ui/main-navbar";
 // import CategoriesNav from "@/app/(routes)/categories/page";
+// import { Search } from "lucide-react";
+// import SearchInput from "./search-input";
 
 // export const revalidate = 0;
 
 // const Navbar = async () => {
 //   const categories = await getCategories();
+
 //   return (
-//     <div className="border-b">
+//     <div className="border-b border-green-600 bg-white">
 //       <Container>
-//         <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center">
-//           <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
-//             <p className="font-bold text-xl">STORE</p>
+//         <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-x-10">
+//           {/* STORE */}
+//           <Link
+//             href="/"
+//             className="flex items-center gap-x-2 font-bold text-xl text-gray-900 tracking-wide hover:text-green-700 transition"
+//           >
+//             La un click distanta
 //           </Link>
-//           {/* <CategoriesNav /> */}
+
+//           {/* PAGINI – rămân imediat după STORE */}
 //           <MainNavbar />
-//           {/* <MainNav data={categories} /> */}
-//           <NavbarActions />
+//           <SearchInput />
+
+//           {/* ACTIUNI (cart etc) */}
+//           <div className="ml-auto">
+//             <NavbarActions />
+//           </div>
 //         </div>
 //       </Container>
 //     </div>
@@ -29,45 +41,113 @@
 // };
 
 // export default Navbar;
-import Container from "@/components/ui/container";
+// "use client";
+// import MainNav from "./main-nav";
+// import Container from "@/components/ui/container";
+// import Link from "next/link";
+// import { MainNavbar } from "./ui/main-navbar";
+
+// import NavbarActions from "./ui/navbar-actions";
+// import SearchInput from "./search-input";
+
+// const Navbar = () => {
+//   return (
+//     <nav className="sticky top-0 z-50 bg-white shadow-sm border-b">
+//       <Container>
+//         <div className="flex h-16 items-center gap-x-8 px-4 sm:px-6 lg:px-8">
+//           {/* LOGO */}
+//           <Link
+//             href="/"
+//             className="flex items-center text-2xl font-bold tracking-wide"
+//           >
+//             <span className="text-blue-600">La un</span>
+//             <span className="text-gray-800 ml-1">click distanță</span>
+//           </Link>
+
+//           {/* PAGINI (MainNav-ul tău) */}
+//           <div className="hidden md:flex items-center gap-8">
+//             <MainNavbar />
+//           </div>
+
+//           {/* SEARCH (design modern) */}
+//           <div className="hidden md:flex">
+//             <div className="flex items-center bg-gray-100 rounded-lg px-4 py-2">
+//               <SearchInput />
+//             </div>
+//           </div>
+
+//           {/* ACTIONS (COSUL TAU) */}
+//           <div className="ml-auto flex items-center gap-4">
+//             <NavbarActions />
+//           </div>
+//         </div>
+//       </Container>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import MainNav from "./main-nav";
-import getCategories from "@/actions/get-categories";
-import NavbarActions from "./ui/navbar-actions";
+import { Menu } from "lucide-react";
 
+import Container from "@/components/ui/container";
 import { MainNavbar } from "./ui/main-navbar";
-import CategoriesNav from "@/app/(routes)/categories/page";
-import { Search } from "lucide-react";
+import NavbarActions from "./ui/navbar-actions";
 import SearchInput from "./search-input";
+import MobileMenu from "./mobil-meniu";
 
-export const revalidate = 0;
-
-const Navbar = async () => {
-  const categories = await getCategories();
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-green-600 bg-white">
-      <Container>
-        <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-x-10">
-          {/* STORE */}
-          <Link
-            href="/"
-            className="flex items-center gap-x-2 font-bold text-xl text-gray-900 tracking-wide hover:text-green-700 transition"
-          >
-            La un click distanta
-          </Link>
+    <>
+      <nav className="sticky top-0 z-50 bg-white shadow-sm border-b">
+        <Container>
+          <div className="flex h-16 items-center gap-x-8 px-4 sm:px-6 lg:px-8">
+            {/* LOGO */}
+            <Link
+              href="/"
+              className="flex items-center text-2xl font-bold tracking-wide"
+            >
+              <span className="text-blue-600">La un</span>
+              <span className="text-gray-800 ml-1">click distanță</span>
+            </Link>
 
-          {/* PAGINI – rămân imediat după STORE */}
-          <MainNavbar />
-          <SearchInput />
+            {/* DESKTOP NAV */}
+            <div className="hidden md:flex items-center gap-8">
+              <MainNavbar />
+            </div>
 
-          {/* ACTIUNI (cart etc) */}
-          <div className="ml-auto">
-            <NavbarActions />
+            {/* DESKTOP SEARCH */}
+            <div className="hidden md:flex">
+              <div className="flex items-center bg-gray-100 rounded-lg px-4 py-2">
+                <SearchInput />
+              </div>
+            </div>
+
+            {/* DESKTOP ACTIONS */}
+            <div className="ml-auto hidden md:flex items-center gap-4">
+              <NavbarActions />
+            </div>
+
+            {/* BURGER BUTTON */}
+            <button
+              onClick={() => setOpen(true)}
+              className="ml-auto md:hidden"
+              aria-label="Open menu"
+            >
+              <Menu className="w-7 h-7 text-gray-800" />
+            </button>
           </div>
-        </div>
-      </Container>
-    </div>
+        </Container>
+      </nav>
+
+      {/* MOBILE MENU */}
+      <MobileMenu open={open} setOpen={setOpen} />
+    </>
   );
 };
 

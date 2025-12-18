@@ -1,29 +1,7 @@
-// import getBillboards from "@/actions/get-billboard";
-// import getProducts from "@/actions/get-products";
-// import Billboard from "@/components/billboard";
-// import ProductList from "@/components/product-list";
-// import Container from "@/components/ui/container";
-
-// const HomePage = async () => {
-//   const products = await getProducts({ isFeatured: true });
-//   const billboard = await getBillboards("710d680e-cc8c-4a2c-8a33-3f559c014aa4");
-//   console.log("RENDER parent, billboard =", billboard);
-
-//   return (
-//     <Container>
-//       <div className="space-y-10 pb-10">{<Billboard data={billboard} />}</div>
-//       <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
-//         <ProductList title="Featured Products" items={products} />
-//       </div>
-//     </Container>
-//   );
-// };
-
-// export default HomePage;
-//chat;
 import getBillboard from "@/actions/get-billboard";
 import getProducts from "@/actions/get-products";
 import Billboard from "@/components/billboard";
+import FilteredProducts from "@/components/filtered-products";
 import ProductList from "@/components/product-list";
 import Container from "@/components/ui/container";
 
@@ -41,7 +19,8 @@ const HomePage = async () => {
       </div>
 
       <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
-        <ProductList title="Featured Products" items={products} />
+        {/* <ProductList title="Featured Products" items={products} /> */}
+        <FilteredProducts products={products} />
       </div>
     </Container>
   );
