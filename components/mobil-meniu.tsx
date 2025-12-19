@@ -37,9 +37,7 @@ const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
         {/* CONTENT */}
         <div className="px-6 py-6 space-y-6">
           {/* PAGINI */}
-          <div className="flex flex-col gap-4">
-            <MainNavbar />
-          </div>
+          <MainNavbar mobile />
 
           <hr />
 
