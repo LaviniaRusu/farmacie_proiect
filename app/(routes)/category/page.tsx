@@ -14,7 +14,6 @@ const CategoryRootPage = async () => {
     );
   }
 
-  // ✅ REDIRECT LA PRIMA CATEGORIE DIN DB
   redirect(`/category/${categories[0].id}`);
 };
 

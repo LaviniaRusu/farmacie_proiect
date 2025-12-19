@@ -21,7 +21,7 @@ const HomePage = async () => {
       <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
         {/* <ProductList title="Featured Products" items={products} /> */}
         {/* <FilteredProducts products={products} /> */}
-        <ProductList title="Featured Products" items={products} />
+        <ProductList title="Produsele noastre" items={products} />
       </div>
     </Container>
   );

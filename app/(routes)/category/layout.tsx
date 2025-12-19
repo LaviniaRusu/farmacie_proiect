@@ -8,7 +8,7 @@ const CategoryLayout = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <div className="border-b">
+      <div className="">
         <MainNav data={categories} />
       </div>
 

@@ -26,13 +26,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${font.variable} antialiased bg-blue-100 text-gray-900`}
+        className={`${font.variable} antialiased bg-white text-gray-900 min-h-screen flex flex-col`}
       >
         <SearchProvider>
           <ModalProvider />
           <ToastProvider />
+
           <Navbar />
-          {children}
+
+          {/* CONTENT */}
+          <main className="flex-1">{children}</main>
+
           <Footer />
         </SearchProvider>
       </body>
