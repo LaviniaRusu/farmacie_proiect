@@ -27,7 +27,7 @@ const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
         {/* HEADER */}
         <div className="flex items-center justify-between px-6 h-16 border-b">
           <span className="text-xl font-bold">
-            <span className="text-blue-600">La un</span> click
+            <span className="text-blue-600"></span>
           </span>
           <button onClick={() => setOpen(false)}>
             <X className="w-6 h-6" />
