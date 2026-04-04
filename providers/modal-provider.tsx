@@ -7,7 +7,8 @@ const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    const id = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(id);
   }, []);
 
   if (!isMounted) {

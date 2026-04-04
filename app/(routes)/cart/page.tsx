@@ -10,7 +10,8 @@ const CartPage = () => {
   const [isMounted, setIsMounted] = useState(false);
   const cart = useCart();
   useEffect(() => {
-    setIsMounted(true);
+    const id = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(id);
   }, []);
 
   if (!isMounted) {

@@ -11,7 +11,8 @@ const NavbarActions = () => {
   const cart = useCart();
 
   useEffect(() => {
-    setIsMounted(true);
+    const id = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(id);
   }, []);
 
   if (!isMounted) {
