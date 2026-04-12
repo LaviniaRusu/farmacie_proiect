@@ -57,6 +57,66 @@
 // };
 
 // export default CartItem;
+//inainte de cantitati
+// "use client";
+
+// import Image from "next/image";
+// import { X } from "lucide-react";
+
+// import IconButton from "@/components/ui/icon-button";
+// import Currency from "@/components/ui/currency";
+// import useCart from "@/hooks/use-cart";
+// import { Product } from "@/types";
+
+// interface CartItemProps {
+//   data: Product;
+// }
+
+// const CartItem: React.FC<CartItemProps> = ({ data }) => {
+//   const cart = useCart();
+
+//   const onRemove = () => {
+//     cart.removeItem(data.id);
+//   };
+
+//   return (
+//     <li className="flex items-center gap-6 p-6 bg-white border border-gray-200 rounded-lg">
+//       {/* Image */}
+//       <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+//         <Image
+//           fill
+//           src={data.images[0].url}
+//           alt={data.name}
+//           className="object-cover"
+//         />
+//       </div>
+
+//       {/* Info */}
+//       <div className="flex-1 min-w-0">
+//         <h3 className="text-lg font-semibold text-gray-900">{data.name}</h3>
+
+//         <p className="text-sm text-gray-500 mt-1">
+//           {data.pharmaceuticalForm.name}
+//         </p>
+//       </div>
+
+//       {/* Price + remove */}
+//       <div className="flex items-center gap-6">
+//         <span className="text-lg font-bold text-gray-900">
+//           <Currency value={data.price} />
+//         </span>
+
+//         <IconButton
+//           onClick={onRemove}
+//           className="hover:bg-gray-100"
+//           icon={<X size={18} className="text-gray-500" />}
+//         />
+//       </div>
+//     </li>
+//   );
+// };
+
+// export default CartItem;
 "use client";
 
 import Image from "next/image";
@@ -67,8 +127,12 @@ import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 import { Product } from "@/types";
 
+type CartItemType = Product & {
+  quantity: number;
+};
+
 interface CartItemProps {
-  data: Product;
+  data: CartItemType;
 }
 
 const CartItem: React.FC<CartItemProps> = ({ data }) => {
@@ -97,12 +161,18 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
         <p className="text-sm text-gray-500 mt-1">
           {data.pharmaceuticalForm.name}
         </p>
+
+        {/* ✅ Cantitate */}
+        <p className="text-sm text-gray-600 mt-2">
+          Cantitate: <span className="font-semibold">{data.quantity}</span>
+        </p>
       </div>
 
       {/* Price + remove */}
       <div className="flex items-center gap-6">
+        {/* ✅ Preț total */}
         <span className="text-lg font-bold text-gray-900">
-          <Currency value={data.price} />
+          <Currency value={Number(data.price) * data.quantity} />
         </span>
 
         <IconButton
