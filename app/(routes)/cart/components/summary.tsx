@@ -82,6 +82,7 @@
 // };
 
 // export default Summary;
+///cod inainte de stcks
 "use client";
 
 import axios from "axios";
@@ -118,7 +119,18 @@ const Summary = () => {
     return total + item.quantity;
   }, 0);
 
+  const hasInvalidStock = items.some(
+    (item) => item.quantity > Number(item.stock) || Number(item.stock) <= 0,
+  );
+
   const onCheckout = async () => {
+    if (hasInvalidStock) {
+      toast.error(
+        "Some products exceed available stock or are no longer available.",
+      );
+      return;
+    }
+
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/checkout`,
@@ -131,8 +143,10 @@ const Summary = () => {
       );
 
       window.location.href = response.data.url;
-    } catch (error) {
-      toast.error("Something went wrong.");
+    } catch (error: any) {
+      const message = error?.response?.data || "Something went wrong.";
+
+      toast.error(message);
     }
   };
 
@@ -154,19 +168,25 @@ const Summary = () => {
 
       <div className="mt-6 space-y-4">
         <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-600">Produse în coș</div>
+          <div className="text-sm text-gray-600">Products in cart</div>
           <div className="text-sm font-medium text-gray-900">{totalItems}</div>
         </div>
 
         <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-          <div className="text-base font-medium text-gray-900">Order total</div>
+          <div className="text-base font-medium text-gray-900">Total</div>
           <Currency value={totalPrice} />
         </div>
+
+        {hasInvalidStock && (
+          <p className="text-sm text-red-600">
+            Some products exceed available stock.
+          </p>
+        )}
       </div>
 
       <Button
         onClick={onCheckout}
-        disabled={items.length === 0}
+        disabled={items.length === 0 || hasInvalidStock}
         className="w-full mt-6"
       >
         Checkout
