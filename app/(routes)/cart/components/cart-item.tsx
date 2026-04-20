@@ -187,6 +187,7 @@
 // };
 
 // export default CartItem;
+/////ok cu stoc
 "use client";
 
 import Image from "next/image";

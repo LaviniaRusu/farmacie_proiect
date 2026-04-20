@@ -112,6 +112,111 @@
 
 // export default ProductCard;
 // //
+// "use client";
+
+// import Image from "next/image";
+// import { Expand, ShoppingCart } from "lucide-react";
+// import { useRouter } from "next/navigation";
+// import { MouseEventHandler } from "react";
+
+// import { Product } from "@/types";
+// import IconButton from "@/components/ui/icon-button";
+// import Currency from "@/components/ui/currency";
+// import usePreviewModal from "@/hooks/use-preview-modal";
+// import useCart from "@/hooks/use-cart";
+
+// interface ProductCardProps {
+//   data: Product;
+// }
+
+// const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
+//   const router = useRouter();
+//   const previewModal = usePreviewModal();
+//   const cart = useCart();
+
+//   const handleClick = () => {
+//     router.push(`/product/${data.id}`);
+//   };
+
+//   const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
+//     event.stopPropagation();
+//     previewModal.onOpen(data);
+//   };
+
+//   const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
+//     event.stopPropagation();
+//     cart.addItem(data);
+//   };
+
+//   return (
+//     <div
+//       onClick={handleClick}
+//       className="
+//         group
+//         cursor-pointer
+//         bg-white
+//         border border-blue-100
+//         rounded-xl
+//         overflow-hidden
+//         transition
+//         hover:shadow-lg
+//         hover:border-blue-300
+//       "
+//     >
+//       {/* IMAGE */}
+//       <div className="relative h-48 bg-blue-50">
+//         <Image
+//           src={data.images?.[0]?.url}
+//           alt={data.name}
+//           fill
+//           className="object-cover"
+//         />
+
+//         {/* ACTIONS */}
+//         <div
+//           className="
+//             absolute
+//             inset-0
+//             flex
+//             items-center
+//             justify-center
+//             gap-4
+//             bg-black/20
+//             opacity-0
+//             group-hover:opacity-100
+//             transition
+//           "
+//         >
+//           <IconButton
+//             onClick={onPreview}
+//             className="bg-white hover:bg-blue-50"
+//             icon={<Expand size={18} className="text-blue-600" />}
+//           />
+//           <IconButton
+//             onClick={onAddToCart}
+//             className="bg-white hover:bg-blue-50"
+//             icon={<ShoppingCart size={18} className="text-blue-600" />}
+//           />
+//         </div>
+//       </div>
+
+//       {/* CONTENT */}
+//       <div className="p-4 space-y-2">
+//         <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">
+//           {data.name}
+//         </h3>
+
+//         <p className="text-xs text-gray-500">{data.category?.name}</p>
+
+//         <div className="pt-2">
+//           <Currency value={data.price} />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ProductCard;
 "use client";
 
 import Image from "next/image";
@@ -134,6 +239,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   const previewModal = usePreviewModal();
   const cart = useCart();
 
+  const isOutOfStock = Number(data.stock) <= 0;
+
   const handleClick = () => {
     router.push(`/product/${data.id}`);
   };
@@ -145,6 +252,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 
   const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
+
+    if (isOutOfStock) {
+      return;
+    }
+
     cart.addItem(data);
   };
 
@@ -163,16 +275,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         hover:border-blue-300
       "
     >
-      {/* IMAGE */}
       <div className="relative h-48 bg-blue-50">
         <Image
           src={data.images?.[0]?.url}
           alt={data.name}
           fill
-          className="object-cover"
+          className={`object-cover ${isOutOfStock ? "opacity-60" : ""}`}
         />
 
-        {/* ACTIONS */}
+        {isOutOfStock && (
+          <div className="absolute top-3 left-3 z-10 rounded-md bg-red-600 px-2 py-1 text-xs font-semibold text-white">
+            Stoc epuizat
+          </div>
+        )}
+
         <div
           className="
             absolute
@@ -194,19 +310,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           />
           <IconButton
             onClick={onAddToCart}
-            className="bg-white hover:bg-blue-50"
+            className={`bg-white hover:bg-blue-50 ${isOutOfStock ? "opacity-50 cursor-not-allowed" : ""}`}
             icon={<ShoppingCart size={18} className="text-blue-600" />}
           />
         </div>
       </div>
 
-      {/* CONTENT */}
       <div className="p-4 space-y-2">
         <h3 className="text-sm font-semibold text-gray-900 line-clamp-1">
           {data.name}
         </h3>
 
         <p className="text-xs text-gray-500">{data.category?.name}</p>
+
+        {isOutOfStock && (
+          <p className="text-xs font-medium text-red-600">
+            Produs indisponibil
+          </p>
+        )}
 
         <div className="pt-2">
           <Currency value={data.price} />
