@@ -102,7 +102,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <Link
-                    href="/orders"
+                    href="/my-orders"
                     className="text-sm font-medium hover:text-blue-600"
                   >
                     My Orders

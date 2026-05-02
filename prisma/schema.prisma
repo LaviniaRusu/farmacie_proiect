@@ -1,0 +1,161 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Store {
+  id         String      @id @default(cuid())
+  name       String
+  userId     String
+  billboards Billboard[] @relation("StoreToBillboard")
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  categories Category[]  @relation("StoreToCategory")
+  products   Product[]   @relation("StoreToProduct")
+  order      Order[]     @relation("StoreToOrder")
+  dosages    Dosage[]    @relation("StoreToDosage")
+
+  storeId String?
+
+  pharmaceuticalForms PharmaceuticalForm[] @relation("StoreToPharmaceuticalForm")
+}
+
+model Billboard {
+  id         String     @id @default(uuid())
+  storeId    String
+  store      Store      @relation("StoreToBillboard", fields: [storeId], references: [id])
+  label      String
+  imageUrl   String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  categories Category[]
+
+  @@index([storeId])
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  storeId     String
+  store       Store     @relation("StoreToCategory", fields: [storeId], references: [id])
+  billboardId String
+  billboard   Billboard @relation(fields: [billboardId], references: [id])
+  products    Product[] @relation("CategoryToProduct")
+  name        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([storeId])
+  @@index([billboardId])
+}
+
+model Dosage {
+  id      String @id @default(uuid())
+  storeId String
+  store   Store  @relation("StoreToDosage", fields: [storeId], references: [id])
+
+  name  String // ex: Standard, Pediatric
+  value String // ex: 500 mg, 10 mg/ml
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
+}
+
+model PharmaceuticalForm {
+  id      String @id @default(uuid())
+  storeId String
+  store   Store  @relation("StoreToPharmaceuticalForm", fields: [storeId], references: [id])
+
+  name  String // Comprimate, Sirop, Cremă
+  code  String // tbl, susp, crm
+  route String // oral, extern, nazal
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
+}
+
+model Product {
+  id      String @id @default(uuid())
+  storeId String
+  store   Store  @relation("StoreToProduct", fields: [storeId], references: [id])
+
+  categoryId String
+  category   Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
+
+  name  String
+  price Decimal
+  stock Int     @default(0)
+
+  isFeatured Boolean @default(false)
+  isArchived Boolean @default(false)
+
+  dosageId String
+  dosage   Dosage  @relation(fields: [dosageId], references: [id])
+  images   Image[]
+
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  orderItems           OrderItem[]
+  pharmaceuticalFormId String
+  pharmaceuticalForm   PharmaceuticalForm @relation(fields: [pharmaceuticalFormId], references: [id])
+
+  @@index([storeId])
+  @@index([categoryId])
+  @@index([dosageId])
+  @@index([pharmaceuticalFormId])
+}
+
+model Image {
+  id        String  @id @default(uuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  storeId    String
+  store      Store       @relation("StoreToOrder", fields: [storeId], references: [id])
+  orderItems OrderItem[]
+  isPaid     Boolean     @default(false)
+  phone      String      @default("")
+  address    String      @default("")
+  userId     String?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@index([storeId])
+  @@index([userId])
+}
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+}
