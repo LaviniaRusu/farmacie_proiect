@@ -54,6 +54,7 @@ import ToastProvider from "@/providers/toast-provider";
 import { SearchProvider } from "@/components/search-context";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import CartUserSync from "@/components/cart-user-sync";
 
 const font = Urbanist({
   variable: "--font-geist-sans",
@@ -79,6 +80,7 @@ export default function RootLayout({
           <SearchProvider>
             <ModalProvider />
             <ToastProvider />
+            <CartUserSync />
 
             <Navbar />
 
